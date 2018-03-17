@@ -1,0 +1,59 @@
+<div class="container">
+    <table id="table" class="bg-white">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Batch</th>
+                <th>Domain</th>
+                <th>Description</th>
+                {{!-- <th>1</th>
+                <th>Batch</th>
+                <th>Batch</th>
+                <th>Batch</th>
+                <th>Batch</th>
+                <th>Batch</th>
+                <th>Batch</th>
+                <th>Batch</th>
+                <th>Batch</th> --}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each companies}}
+                <tr>
+                    <td>Row 1 Data 1</td>
+                    <td>Row 1 Data 2</td>
+                    <td>Row 3 Data 3</td>
+                </tr>
+            {{#each companies}}
+        </tbody>
+    </table>
+</div>
+
+
+{{!-- <script>
+    $('#table').dataTable( {
+        "ajax": {
+            "url": "/api/companies",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "name" },
+            { "data": "batch" },
+            { "data": "domain" },
+            { "data": "description" },
+            {{!-- { "data": "category" },
+            { "data": "location_city" },
+            { "data": "location_state" },
+            { "data": "location_country" },
+            { "data": "link_crunchbase" },
+            { "data": "link_angellist" },
+            { "data": "link_twitter" },
+            { "data": "link_facebook" },
+            { "data": "link_instagram" }
+        ]
+    });
+</script> --}}
+
+<script>
+    $('#table').dataTable();
+</script>

@@ -1,0 +1,32 @@
+body, table, .form-control, .btn {
+	font-size: 0.875rem;	
+}
+
+body {
+    margin-top: 70px;
+}
+
+.navbar-brand {
+    color: #f06633;
+}
+
+.badge {
+    text-transform: uppercase;
+}
+
+#table {
+    border-collapse: collapse!important;
+}
+
+
+.table thead th {
+	border:none;
+}
+
+.table td {
+    border-top: 1px solid #e8e8e8;
+}
+
+#table_wrapper {
+    padding: 0;
+}
