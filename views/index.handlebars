@@ -103,4 +103,24 @@ $(document).on('click', '.nav-link', function(){
     $('.nav-link').removeClass('active').removeClass('bg-white').removeClass('text-primary').addClass('border-light');
     $(this).addClass('active').addClass('bg-white').addClass('text-primary').removeClass('border-light');
 });
+
+// Clickable row -------------------------------------------------
+fnDrawCallback: function () {
+
+  $('#table tbody tr').click(function() {
+
+    // get position of the selected row
+    var position = table.fnGetPosition(this);
+
+    // value of the first column (can be hidden)
+    var id = table.fnGetData(position)[0];
+
+    console.log(id);
+
+    // redirect
+    document.location.href = '/company/' + id
+  })
+
+}
+
 </script>
