@@ -13,11 +13,22 @@ router.get('/', function(req, res) {
 });
 
 // HTML - company page
-router.get('/company/:id', function(req, res) {
+router.get('/company/:slug', function(req, res) {
     db.Company.findOne({
-        where: {id: req.params.id}
+        where: {slug: req.params.slug}
     }).then(function(data) {
-        res.render('company', data.dataValues);
+        res.render('company', {
+            data: data.dataValues,
+            helpers: {
+                thousands: function (x) {
+                    x = x.toString();
+                    var pattern = /(-?\d+)(\d{3})/;
+                    while (pattern.test(x))
+                        x = x.replace(pattern, "$1,$2");
+                    return x;
+                }
+            }
+        });
     })
 });
 
@@ -37,16 +48,17 @@ router.get('/api/company/:id', function(req, res) {
     })
 });
 
-
-// // API post new example
-// router.post('/api/company', function(req, res) {
-//     db.Company.create({
-//         description: req.body.description,
-//         done: false
-//     }).then(function(data) {
-//         res.json(data);
-//     });
-// });
+// API - post a correction
+router.post('/api/correction', function(req, res) {
+    db.Correction.create({
+        company_id: req.body.company_id,
+        company_name: req.body.company_name,
+        field: req.body.field,
+        correct_value: req.body.correct_value
+    }).then(function(data) {
+        res.json(data);
+    });
+});
 
 // // API change example
 // router.put('/api/company/:id', function(req, res) {

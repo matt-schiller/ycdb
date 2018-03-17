@@ -1,11 +1,19 @@
+{{#with data}}
 <div class="container">
-    <h5>{{name}}</h5>
-    <p>{{description}}</p>
+    <div class="row">
+        <div class="col-11">
+            <h4>{{name}}</h4>
+            <p>{{description}}</p>
+        </div>
+        <div class="col-1 text-right">
+            <p class="badge text-white mt-2 {{status}}">{{status}}</p>
+        </div>
+    </div>
     <div class="row">
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
-                    <img class="img-fluid" src="http://ycdb.snappr.co/screenshots2/e7262adc-79d4-4fd7-a64e-552569ef4c1a.jpg" onerror="if (this.src != 'assets/images/no-image.png') this.src = 'assets/images/no-image.png';">
+                    <img class="img-fluid" src="http://ycdb.snappr.co/screenshots2/{{img_screenshot_desktop}}" onerror="if (this.src != '../img/no-image.png') this.src = '../img/no-image.png';">
                 </div>
             </div>
             <hr>
@@ -16,16 +24,16 @@
                         <div class="col-6">
                             <div class="card card-in-card">
                                 <div class="card-body">
-                                    <h6><i class="fa fa-globe" aria-hidden="true"></i> Alexa Rank</h6>
-                                    <p class="mb-0">500,406</p>
+                                    <h6 class="text-secondary"><i class="fas fa-globe mr-1" aria-hidden="true"></i>Alexa Rank</h6>
+                                    <p class="mb-0">{{#if stat_alexa_rank}}{{thousands stat_alexa_rank}}{{else}}Not found{{/if}}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="card card-in-card">
                                 <div class="card-body">
-                                    <h6><i class="fa fa-sitemap" aria-hidden="true"></i> Domain Authority</h6>
-                                    <p class="mb-0">54</p>
+                                    <h6 class="text-secondary"><i class="fas fa-sitemap mr-1" aria-hidden="true"></i>Moz Domain Authority</h6>
+                                    <p class="mb-0">{{#if stat_moz_domain_authority}}{{thousands stat_moz_domain_authority}}{{else}}Not found{{/if}}</p>
                                 </div>
                             </div>
                         </div>
@@ -34,16 +42,34 @@
                         <div class="col-6">
                             <div class="card card-in-card">
                                 <div class="card-body">
-                                    <h6><i class="fas fa-database" aria-hidden="true"></i> Crunchbase Rank</h6>
-                                    <p class="mb-0">987</p>
+                                    <h6 class="text-secondary"><i class="fas fa-database mr-1" aria-hidden="true"></i>Crunchbase Rank</h6>
+                                    <p class="mb-0">{{#if stat_crunchbase_rank}}{{thousands stat_crunchbase_rank}}{{else}}Not found{{/if}}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="card card-in-card">
                                 <div class="card-body">
-                                    <h6><i class="fab fa-twitter" aria-hidden="true"></i> Twitter Followers</h6>
-                                    <p class="mb-0">3,876</p>
+                                    <h6 class="text-secondary"><i class="fab fa-twitter mr-1" aria-hidden="true"></i>Twitter Followers</h6>
+                                    <p class="mb-0">{{#if stat_twitter_followers}}{{thousands stat_twitter_followers}}{{else}}Not found{{/if}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class="card card-in-card">
+                                <div class="card-body">
+                                    <h6 class="text-secondary"><i class="far fa-thumbs-up mr-1" aria-hidden="true"></i>Facebook Likes</h6>
+                                    <p class="mb-0">{{#if stat_facebook_likes}}{{thousands stat_facebook_likes}}{{else}}Not found{{/if}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card card-in-card">
+                                <div class="card-body">
+                                    <h6 class="text-secondary"><i class="fas fa-newspaper mr-1" aria-hidden="true"></i>News Articles</h6>
+                                    <p class="mb-0">{{#if stat_crunchbase_news_articles}}{{thousands stat_crunchbase_news_articles}}{{else}}Not found{{/if}}</p>
                                 </div>
                             </div>
                         </div>
@@ -52,21 +78,48 @@
                         <div class="col-6">
                             <div class="card card-in-card">
                                 <div class="card-body">
-                                    <h6><i class="far fa-thumbs-up" aria-hidden="true"></i> Facebook Likes</h6>
-                                    <p class="mb-0">11,694</p>
+                                    <h6 class="text-secondary"><i class="fas fa-arrow-alt-circle-up mr-1" aria-hidden="true"></i>Product Hunt Upvotes</h6>
+                                    <p class="mb-0">{{#if stat_producthunt_upvotes}}{{thousands stat_producthunt_upvotes}}{{else}}Not found{{/if}}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="card card-in-card">
                                 <div class="card-body">
-                                    <h6><i class="far fa-newspaper" aria-hidden="true"></i> Recent Articles</h6>
-                                    <p class="mb-0">131</p>
+                                    <h6 class="text-secondary"><i class="fas fa-money-bill-alt mr-1" aria-hidden="true"></i>Funding Amount ($'000s)</h6>
+                                    <p class="mb-0">{{#if stat_crunchbase_funding_amount}}{{thousands stat_crunchbase_funding_amount}}{{else}}Not found{{/if}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <hr>
+            <h5>Recent social media posts</h5>
+            <div class="row">
+                {{#if link_twitter}}<div class="col">
+                    <a class="twitter-timeline" data-width="" data-height="400" href="{{link_twitter}}">
+                    {{name}} Twitter
+                    </a>
+                    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>{{/if}}
+                {{#if link_facebook}}<div class="col">
+                    <div class="fb-page" data-href="{{link_facebook}}" data-tabs="timeline" data-width="" data-height="400" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/gowntown.com.au/" class="fb-xfbml-parse-ignore">
+                    <a href="{{link_facebook}}">
+                    {{name}}
+                    </a>
+                    </blockquote></div>
+                </div>
+                <div id="fb-root"></div>
+                <script>
+                    (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=513177198796483";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+                </script>{{/if}}
             </div>
             <hr>
             <h5>Report an issue</h5>
@@ -75,32 +128,63 @@
                     <input id="issue-field" class="form-control mb-2" placeholder="Incorrect field">
                     <input id="issue-correct-value" class="form-control mb-2" placeholder="Correct value">
                     <button id="issue-submit" class="btn btn-primary">Report issue</button>
-                    <div id="issue-alert" class="alert alert-success d-none mt-2" role="alert">
+                    <div id="issue-alert" class="alert alert-success alert-dismissible fade show d-none mt-2" role="alert">
                         <strong>Thanks!</strong> The issue has been logged and we'll be looking into it ASAP
+                        {{!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                            <span aria-hidden="true">&times;</span>
+                        </button> --}}
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-4">
-            <a class="btn btn-primary btn-block" href="https://www.snappr.co" target="_blank"><i class="fas fa-external-link-alt" aria-hidden='true'></i> Go to website</a>
+            <a class="btn btn-primary btn-block" href="http://www.{{domain}}" target="_blank"><i class="fas fa-external-link-alt" aria-hidden='true'></i> Go to website</a>
             <hr>
             <h5>Links</h5>
-            <div class="links-block">
-                <a target="_blank"><i class="fab fa-angellist"></i></a>
-                <a target="_blank"><i class="fas fa-database"></i></a>
-                <a target="_blank"><i class="fab fa-twitter"></i></a>
-                <a target="_blank"><i class="fab fa-facebook"></i></a>
-                <a target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
+            <h5 class="text-muted">
+                <a {{#if link_angellist}}href="{{link_angellist}}" target="_blank"{{/if}}><i class="fab fa-angellist mr-1"></i></a>
+                <a {{#if link_crunchbase}}href="{{link_crunchbase}}" target="_blank"{{/if}}><i class="fas fa-database mr-1"></i></a>
+                <a {{#if link_twitter}}href="{{link_twitter}}" target="_blank"{{/if}}><i class="fab fa-twitter mr-1"></i></a>
+                <a {{#if link_facebook}}href="{{link_facebook}}" target="_blank"{{/if}}><i class="fab fa-facebook mr-1"></i></a>
+                <a {{#if link_linkedin}}href="{{link_linkedin}}" target="_blank"{{/if}}><i class="fab fa-linkedin mr-1"></i></a>
+                <a {{#if link_instagram}}href="{{link_instagram}}" target="_blank"{{/if}}><i class="fab fa-instagram mr-1"></i></a>
+            </h5>
             <hr>
             <h5>Details</h5>
             <p class="lighter"><strong>Batch:</strong> {{batch}}</p>
-            <p class="lighter"><strong>Founded:</strong> 2016</p>
-            <p class="lighter"><strong>Location:</strong> {{location_city}}</span></p>
+            {{#if category}}<p class="lighter"><strong>Category:</strong> {{category}}</p>{{/if}}
+            {{#if founded_year}}<p class="lighter"><strong>Founded:</strong> {{founded_year}}</p>{{/if}}
+            {{#if closed_year}}<p class="lighter"><strong>Founded:</strong> {{closed_year}}</p>{{/if}}
+            {{#if location_city}}<p class="lighter"><strong>Location:</strong> {{location_city}}, {{location_state}}, {{location_country}}</span></p>{{/if}}
+            <hr>
+            {{#if location_city}}<iframe
+                width="100%"
+                height="120"
+                frameborder="0" style="border:0;margin-bottom:-10px;"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyABD65CBGBoPXXerBWTYaYMWZmcBnDPR80
+                &q={{location_city}}, {{location_state}}, {{location_country}}" allowfullscreen>
+            </iframe>{{/if}}
         </div>
     </div>
 </div>
-
-
-
+<script>
+// Post correction
+$(document).on('click', '#issue-submit', function() {
+    var field = $('#issue-field').val();
+    var correctValue = $('#issue-correct-value').val();
+    $.ajax('/api/correction', {
+        type: 'POST',
+        data: {
+            company_id: {{id}},
+            company_name: "{{name}}",
+            field: field,
+            correct_value: correctValue
+        }
+    }).then(function() {
+        $('#issue-field').val("");
+        $('#issue-correct-value').val("");
+        $('#issue-alert').removeClass("d-none");
+    });
+});
+</script>
+{{/with}}

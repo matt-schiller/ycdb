@@ -6,12 +6,21 @@ body {
     margin-top: 70px;
 }
 
-.navbar-brand {
+
+a {
+    text-decoration: none!important;
+}
+.navbar-brand, ul li a svg, h6 svg {
     color: #f06633;
 }
 
-.badge {
-    text-transform: uppercase;
+.navbar-brand img {
+    margin-top: -3px;
+}
+
+.nav-pills .nav-link:hover, .nav-pills .nav-link.active:hover {
+	background-color:#fbfbfb;
+	border: 1px solid #e8e8e8!important;
 }
 
 #table {
@@ -29,4 +38,22 @@ body {
 
 #table_wrapper {
     padding: 0;
+}
+
+.badge {
+    text-transform: uppercase;
+}
+
+/* Status badge color classes */
+
+.Live {
+    background-color: #ffc107;
+}
+
+.Exited {
+    background-color: #28a745;
+}
+
+.Dead {
+    background-color: #dc3545;
 }
